@@ -55,7 +55,7 @@ LDLIBS += -lpdcursesw
 endif
 
 ifneq ($(OS),Windows_NT)
-LDLIBS += -lm -lbluetooth -lmhash
+LDLIBS += -lm -lbluetooth -lmhash -ludev
 else
 LDLIBS += $(shell sdl2-config --libs) -lws2_32 -lintl
 LDLIBS:=$(filter-out -mwindows,$(LDLIBS))

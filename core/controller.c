@@ -28,7 +28,7 @@
 #include <haptic/haptic_core.h>
 
 #define DEFAULT_BAUDRATE 500000 //bps
-static const int baudrates[] = { 2000000, 1000000, DEFAULT_BAUDRATE }; //bps
+//static const int baudrates[] = { 2000000, 1000000, DEFAULT_BAUDRATE }; //bps
 #define ADAPTER_TIMEOUT 1000 //millisecond
 /*
  * The adapter restarts about 15ms after receiving the reset command.
@@ -826,6 +826,7 @@ static int adapter_get_baudrate_retry(int adapter, int retries)
   return baudrate;
 }
 
+/*
 static int adapter_set_baudrate(int adapter, int baudrate)
 {
   s_packet packet = { .header = { .type = BYTE_BAUDRATE, .length = 1 }, .value = { baudrate / 100000 } };
@@ -839,6 +840,7 @@ static int adapter_set_baudrate(int adapter, int baudrate)
 
   return 0;
 }
+*/
 
 static int adapter_send_reset(int adapter)
 {
@@ -1003,8 +1005,9 @@ e_gimx_status adapter_detect()
 
             ginfo(_("Current baudrate: %d bps.\n"), baudrate);
 
+            /* skip baudrate testing
             if (baudrate > 0) {
-
+              
               unsigned int b;
               for (b = 0; b < sizeof(baudrates) / sizeof(*baudrates); ++b)
               {
@@ -1034,7 +1037,7 @@ e_gimx_status adapter_detect()
               if (ret == E_GIMX_STATUS_SUCCESS){
                 ginfo(_("Using baudrate: %d bps.\n"), baudrate);
               }
-            }
+            } */
           }
 
           if(ret == E_GIMX_STATUS_SUCCESS && !adapter->proxy.is_proxy)
